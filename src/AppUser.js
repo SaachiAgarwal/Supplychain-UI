@@ -8,15 +8,15 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      assets: []
+      users: []
     };
   }
 
   componentDidMount() {
-    axios.get('/api/asset')
+    axios.get('/api/user')
       .then(res => {
-        this.setState({ assets: res.data });
-        console.log(this.state.assets);
+        this.setState({ users: res.data });
+        console.log(this.state.users);
       });
   }
 
@@ -26,30 +26,30 @@ class App extends Component {
         <div class="panel panel-default">
           <div class="panel-heading">
             <h3 class="panel-title">
-              ASSET CATALOG
+              USER CATALOG
             </h3>
           </div>
           <div class="panel-body">
+	    <h4><Link to="/createuser"><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> Add User</Link></h4>
 	   
-            <h4><Link to="/create"><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> Add Asset Fields</Link></h4>
+            
             <table class="table table-stripe">
               <thead>
                 <tr>
-                  <th>Type</th>
-                  <th>Field_Id</th>
-                  <th>Field_Name</th>
+                  <th>Name</th>
+                  <th>Email</th>
+                  <th>Role</th>
                 </tr>
               </thead>
               <tbody>
-                {this.state.assets.	map(asset =>
+                {this.state.users.map(user =>
                   <tr>
-                    <td><Link to={`/show/${asset._id}`}>{asset.type}</Link></td>
-                    <td>{asset.field_id}</td>
-                    <td>{asset.field_name}</td>
+                    <td><Link to={`/showuser/${user._id}`}>{user.name}</Link></td>
+                    <td>{user.email}</td>
+                    <td>{user.role}</td>
                   </tr>
                 )}
               </tbody>
-<h4><Link to="/createasset"><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> Create Asset</Link></h4>
             </table>
           </div>
         </div>

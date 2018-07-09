@@ -1,43 +1,53 @@
 var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
-var Book = require('../models/Book.js');
+var Asset = require('../models/Asset.js');
 
-/* GET ALL BOOKS */
+
+/* GET ALL Asset with root node */
+router.get('/root', function(req, res, next) {
+  Asset.find(function (err, products) {
+    if (err) return next(err);
+    res.json({parent_key : products});
+  });
+});
+
+
+
+/* GET ALL User */
 router.get('/', function(req, res, next) {
-  Book.find(function (err, products) {
+  Asset.find(function (err, products) {
     if (err) return next(err);
     res.json(products);
   });
 });
-
-/* GET SINGLE BOOK BY ID */
+/* GET SINGLE Asset BY ID */
 router.get('/:id', function(req, res, next) {
-  Book.findById(req.params.id, function (err, post) {
+  Asset.findById(req.params.id, function (err, post) {
     if (err) return next(err);
     res.json(post);
   });
 });
 
-/* SAVE BOOK */
+/* SAVE Asset */
 router.post('/', function(req, res, next) {
-  Book.create(req.body, function (err, post) {
+  Asset.create(req.body, function (err, post) {
     if (err) return next(err);
     res.json(post);
   });
 });
 
-/* UPDATE BOOK */
+/* UPDATE Asset */
 router.put('/:id', function(req, res, next) {
-  Book.findByIdAndUpdate(req.params.id, req.body, function (err, post) {
+  Asset.findByIdAndUpdate(req.params.id, req.body, function (err, post) {
     if (err) return next(err);
     res.json(post);
   });
 });
 
-/* DELETE BOOK */
+/* DELETE Asset */
 router.delete('/:id', function(req, res, next) {
-  Book.findByIdAndRemove(req.params.id, req.body, function (err, post) {
+  Asset.findByIdAndRemove(req.params.id, req.body, function (err, post) {
     if (err) return next(err);
     res.json(post);
   });

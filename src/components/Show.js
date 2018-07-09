@@ -7,21 +7,21 @@ class Show extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      book: {}
+      asset: {}
     };
   }
 
   componentDidMount() {
-    axios.get('/api/book/'+this.props.match.params.id)
+    axios.get('/api/asset/'+this.props.match.params.id)
       .then(res => {
-        this.setState({ book: res.data });
-        console.log(this.state.book);
+        this.setState({ asset: res.data });
+        console.log(this.state.asset);
       });
   }
 
   delete(id){
     console.log(id);
-    axios.delete('/api/book/'+id)
+    axios.delete('/api/asset/'+id)
       .then((result) => {
         this.props.history.push("/")
       });
@@ -33,25 +33,25 @@ class Show extends Component {
         <div class="panel panel-default">
           <div class="panel-heading">
             <h3 class="panel-title">
-              {this.state.book.title}
+              {this.state.asset.field_name}
             </h3>
           </div>
           <div class="panel-body">
-            <h4><Link to="/"><span class="glyphicon glyphicon-th-list" aria-hidden="true"></span> Book List</Link></h4>
+            <h4><Link to="/"><span class="glyphicon glyphicon-th-list" aria-hidden="true"></span> Asset List</Link></h4>
             <dl>
-              <dt>ISBN:</dt>
-              <dd>{this.state.book.isbn}</dd>
-              <dt>Author:</dt>
-              <dd>{this.state.book.author}</dd>
+              <dt>Type:</dt>
+              <dd>{this.state.asset.type}</dd>
+              <dt>Field_Id:</dt>
+              <dd>{this.state.asset.field_id}</dd>
+              <dt>Data_Type:</dt>
+              <dd>{this.state.asset.data_type}</dd>
               <dt>Description:</dt>
-              <dd>{this.state.book.description}</dd>
-              <dt>Publish Date:</dt>
-              <dd>{this.state.book.published_year}</dd>
-              <dt>Publisher:</dt>
-              <dd>{this.state.book.publisher}</dd>
+              <dd>{this.state.asset.description}</dd>
+              <dt>Index:</dt>
+              <dd>{this.state.asset.index}</dd>
             </dl>
-            <Link to={`/edit/${this.state.book._id}`} class="btn btn-success">Edit</Link>&nbsp;
-            <button onClick={this.delete.bind(this, this.state.book._id)} class="btn btn-danger">Delete</button>
+            <Link to={`/edit/${this.state.asset._id}`} class="btn btn-success">Edit</Link>&nbsp;
+            <button onClick={this.delete.bind(this, this.state.asset._id)} class="btn btn-danger">Delete</button>
           </div>
         </div>
       </div>

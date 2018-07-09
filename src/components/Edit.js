@@ -7,30 +7,30 @@ class Edit extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      book: {}
+      asset: {}
     };
   }
 
   componentDidMount() {
-    axios.get('/api/book/'+this.props.match.params.id)
+    axios.get('/api/asset/'+this.props.match.params.id)
       .then(res => {
-        this.setState({ book: res.data });
-        console.log(this.state.book);
+        this.setState({ asset: res.data });
+        console.log(this.state.asset);
       });
   }
 
   onChange = (e) => {
-    const state = this.state.book
+    const state = this.state.asset
     state[e.target.name] = e.target.value;
-    this.setState({book:state});
+    this.setState({asset:state});
   }
 
   onSubmit = (e) => {
     e.preventDefault();
 
-    const { isbn, title, author, description, published_year, publisher } = this.state.book;
+    const { type, field_id, field_name, data_type, description, index } = this.state.asset;
 
-    axios.put('/api/book/'+this.props.match.params.id, { isbn, title, author, description, published_year, publisher })
+    axios.put('/api/asset/'+this.props.match.params.id, { type, field_id, field_name, data_type, description, index })
       .then((result) => {
         this.props.history.push("/show/"+this.props.match.params.id)
       });
@@ -42,35 +42,35 @@ class Edit extends Component {
         <div class="panel panel-default">
           <div class="panel-heading">
             <h3 class="panel-title">
-              EDIT BOOK
+              EDIT ASSET
             </h3>
           </div>
           <div class="panel-body">
-            <h4><Link to={`/show/${this.state.book._id}`}><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span> Book List</Link></h4>
+            <h4><Link to={`/show/${this.state.asset._id}`}><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span> Asset List</Link></h4>
             <form onSubmit={this.onSubmit}>
               <div class="form-group">
-                <label for="isbn">ISBN:</label>
-                <input type="text" class="form-control" name="isbn" value={this.state.book.isbn} onChange={this.onChange} placeholder="ISBN" />
+                <label for="type">Type:</label>
+                <input type="text" class="form-control" name="type" value={this.state.asset.type} onChange={this.onChange} placeholder="Type" />
               </div>
               <div class="form-group">
-                <label for="title">Title:</label>
-                <input type="text" class="form-control" name="title" value={this.state.book.title} onChange={this.onChange} placeholder="Title" />
+                <label for="field_id">Field_Id:</label>
+                <input type="text" class="form-control" name="field_id" value={this.state.asset.field_id} onChange={this.onChange} placeholder="Field_Id" />
               </div>
               <div class="form-group">
-                <label for="author">Author:</label>
-                <input type="text" class="form-control" name="author" value={this.state.book.author} onChange={this.onChange} placeholder="Author" />
+                <label for="field_name">Field_Name:</label>
+                <input type="text" class="form-control" name="field_name" value={this.state.asset.field_name} onChange={this.onChange} placeholder="Field_Name" />
+              </div>
+              <div class="form-group">
+                <label for="data_type">Data_Type:</label>
+                <input type="text" class="form-control" name="data_type" value={this.state.asset.data_type} onChange={this.onChange} placeholder="Data_Type" />
               </div>
               <div class="form-group">
                 <label for="description">Description:</label>
-                <input type="text" class="form-control" name="description" value={this.state.book.description} onChange={this.onChange} placeholder="Description" />
+                <input type="text" class="form-control" name="Description" value={this.state.asset.description} onChange={this.onChange} placeholder="Description" />
               </div>
               <div class="form-group">
-                <label for="published_date">Published Date:</label>
-                <input type="number" class="form-control" name="published_year" value={this.state.book.published_year} onChange={this.onChange} placeholder="Published Year" />
-              </div>
-              <div class="form-group">
-                <label for="publisher">Publisher:</label>
-                <input type="text" class="form-control" name="publisher" value={this.state.book.publisher} onChange={this.onChange} placeholder="Publisher" />
+                <label for="index">Index:</label>
+                <input type="text" class="form-control" name="index" value={this.state.asset.index} onChange={this.onChange} placeholder="Index" />
               </div>
               <button type="submit" class="btn btn-default">Submit</button>
             </form>
