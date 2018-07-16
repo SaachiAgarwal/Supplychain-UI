@@ -23,7 +23,7 @@ class Show extends Component {
     console.log(id);
     axios.delete('/api/asset/'+id)
       .then((result) => {
-        this.props.history.push("/")
+        this.props.history.push("/home")
       });
   }
 
@@ -37,7 +37,7 @@ class Show extends Component {
             </h3>
           </div>
           <div class="panel-body">
-            <h4><Link to="/"><span class="glyphicon glyphicon-th-list" aria-hidden="true"></span> Asset List</Link></h4>
+            <h4><Link to="/viewassets"><span class="glyphicon glyphicon-th-list" aria-hidden="true"></span> Asset List</Link></h4>
             <dl>
               <dt>Type:</dt>
               <dd>{this.state.asset.type}</dd>

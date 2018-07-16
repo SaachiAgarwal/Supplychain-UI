@@ -3,6 +3,14 @@ var router = express.Router();
 var mongoose = require('mongoose');
 var Asset = require('../models/User.js');
 
+/* GET ALL Asset with root node */
+router.get('/root', function(req, res, next) {
+  Asset.find(function (err, products) {
+    if (err) return next(err);
+    res.json({parent_key : products});
+  });
+});
+
 /* GET ALL User */
 router.get('/', function(req, res, next) {
   Asset.find(function (err, products) {

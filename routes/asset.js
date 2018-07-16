@@ -13,7 +13,6 @@ router.get('/root', function(req, res, next) {
 });
 
 
-
 /* GET ALL User */
 router.get('/', function(req, res, next) {
   Asset.find(function (err, products) {
@@ -21,6 +20,15 @@ router.get('/', function(req, res, next) {
     res.json(products);
   });
 });
+
+
+router.get('/detail/:id', function(req, res, next) {
+  Asset.findById(req.params.id, function (err, post) {
+    if (err) return next(err);
+    res.json(post);
+  });
+});
+
 /* GET SINGLE Asset BY ID */
 router.get('/:id', function(req, res, next) {
   Asset.findById(req.params.id, function (err, post) {

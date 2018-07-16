@@ -41,6 +41,7 @@ componentDidMount() {
   }
 
  handleSubmit(event) {
+this.setState({ isLoading: true });
     event.preventDefault();
     const data = new FormData(event.target);
 
@@ -77,7 +78,8 @@ componentDidMount() {
 		  const content = await rawResponse.json();
 
 		  console.log(content);
-		})();
+		})().then(data => this.setState({ isLoading: false }))
+      .catch(error => this.setState({ error, isLoading: false }));
 
 }
 
@@ -108,7 +110,7 @@ componentDidMount() {
 		 
 		<div class="form-group">
 	  	<label>
-		 {parent_key.type} , 
+		 
 	   	 {parent_key.field_id} : 
 		</label>
 	    	<input type="text" id={parent_key.field_id}  class="form-control" name={parent_key.field_id} />
@@ -119,7 +121,7 @@ componentDidMount() {
 
 		 } 
 	 </div>
-	<button>Send data!</button>
+	<button class="btn btn-success">Create Asset</button>
 	</form>
 	      </div>
 	

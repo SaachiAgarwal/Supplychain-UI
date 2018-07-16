@@ -10,6 +10,7 @@
     "mongoose": "^4.12.4",
     "morgan": "^1.9.0",
     "react": "^16.0.0",
+    "react-bootstrap": "^0.32.1",
     "react-dom": "^16.0.0",
     "react-router-dom": "^4.2.2",
     "react-scripts": "1.0.14",
@@ -22,6 +23,7 @@
     "eject": "react-scripts eject"
   },
   "devDependencies": {
-    "bootstrap": "^3.3.7"
+    "bootstrap": "^3.3.7",
+    "react-router-role-authorization": "^1.1.4"
   }
 }

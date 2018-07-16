@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-
+import './App.css';
 class App extends Component {
 
   constructor(props) {
@@ -22,16 +22,26 @@ class App extends Component {
 
   render() {
     return (
-      <div class="container">
+     
+ <div class="container">
+<div class="topnav">
+  <a class="active" href="/home">Home</a>
+  <a href="/defineasset">Define Asset</a>
+  <a href="/createasset">Create Asset</a>
+  <a href="/viewassets">View Assets</a>
+ <a href="/createuser">Create User</a>
+</div>
         <div class="panel panel-default">
           <div class="panel-heading">
-            <h3 class="panel-title">
+           
+
+ <h3 class="panel-title">
               ASSET CATALOG
             </h3>
           </div>
           <div class="panel-body">
 	   
-            <h4><Link to="/create"><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> Add Asset Fields</Link></h4>
+           
             <table class="table table-stripe">
               <thead>
                 <tr>
@@ -41,7 +51,7 @@ class App extends Component {
                 </tr>
               </thead>
               <tbody>
-                {this.state.assets.	map(asset =>
+                {this.state.assets.map(asset =>
                   <tr>
                     <td><Link to={`/show/${asset._id}`}>{asset.type}</Link></td>
                     <td>{asset.field_id}</td>
@@ -49,7 +59,7 @@ class App extends Component {
                   </tr>
                 )}
               </tbody>
-<h4><Link to="/createasset"><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> Create Asset</Link></h4>
+
             </table>
           </div>
         </div>

@@ -27,7 +27,7 @@ class Create extends Component {
 
     axios.post('/api/user', {  name , password , email , role })
       .then((result) => {
-        this.props.history.push("/")
+        this.props.history.push("/home")
       });
   }
 
@@ -42,7 +42,7 @@ class Create extends Component {
             </h3>
           </div>
           <div class="panel-body">
-            <h4><Link to="/"><span class="glyphicon glyphicon-th-list" aria-hidden="true"></span> User List</Link></h4>
+           
             <form onSubmit={this.onSubmit}>
               <div class="form-group">
                 <label for="name">Name:</label>
@@ -61,7 +61,7 @@ class Create extends Component {
                 <textArea class="form-control" name="role" onChange={this.onChange} placeholder="role" cols="80" rows="3">{role}</textArea>
               </div>
              
-              <button type="submit" class="btn btn-default">Submit</button>
+              <button type="submit" class="btn btn-success">Create User</button>
             </form>
           </div>
         </div>

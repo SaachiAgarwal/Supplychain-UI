@@ -29,7 +29,7 @@
 
 	    axios.post('/api/asset', { type, field_id, field_name, data_type, description, index })
 	      .then((result) => {
-		this.props.history.push("/")
+		this.props.history.push("/home")
 	      });
 	  }
 
@@ -44,7 +44,7 @@
 		    </h3>
 		  </div>
 		  <div class="panel-body">
-		    <h4><Link to="/"><span class="glyphicon glyphicon-th-list" aria-hidden="true"></span> Asset List</Link></h4>
+		  
 		    <form onSubmit={this.onSubmit}>
 		      <div class="form-group">
 		        <label for="type">Type:</label>

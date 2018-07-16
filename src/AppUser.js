@@ -30,7 +30,7 @@ class App extends Component {
             </h3>
           </div>
           <div class="panel-body">
-	    <h4><Link to="/createuser"><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> Add User</Link></h4>
+	    
 	   
             
             <table class="table table-stripe">
