@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+var QRCode = require('../QR.js');
 
 var content = [];
 var results = [];
@@ -126,7 +127,14 @@ class ViewAsset extends React.Component {
 
 	if(value1 == 'Key'){
           children.push(<td>{value1}</td>)
+		
           children.push(<td>{<Link to={`/viewsingleasset/${value2}`} class="btn btn-success">{value2}</Link>}</td>)
+children.push(<td><dt>QR:</dt>
+              <dt><QRCode class='qrcode' value={this.state.asset1.Key}
+                    size={40}
+                    fgColor='purple'
+                    bgColor='white'
+                /></dt></td>)
 	}else{
 	  children.push(<td>{value1}</td>)
 	 children.push(<td>{value2}</td>)
@@ -209,11 +217,10 @@ class ViewAsset extends React.Component {
               </thead>
 		<tbody>
 		{this.createTable()}
+ 
 		</tbody>
 		</table>
-          <dl>
-    	
-           </dl>
+
                </div>
             </div>
 

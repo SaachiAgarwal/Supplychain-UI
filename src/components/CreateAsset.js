@@ -45,35 +45,16 @@ this.setState({ isLoading: true });
     event.preventDefault();
     const data = new FormData(event.target);
 
-   /*this.setState({
-      res: stringifyFormData(data),
-    });*/
+   
     var data1 = stringifyFormData(data);
-
-   // alert(this.state.res);
-   // alert(document.forms["myform"]);
-    //var data1;
-    //data1 = document.forms["myform"].serialize();
-    //alert(data1);
-    
-//alert(data["carat"].value);
-   /* fetch('http://localhost:3000/createquery', {
-      method: 'POST',
-      mode: 'CORS',
-      //header :{'Content-Type': 'application/json','Accept': 'application/json'},	
-      body: data1,
-    }).then(res => {
-        return res;
-    }).catch(err => err);*/
-
-			(async () => {
+  		(async () => {
 		  const rawResponse = await fetch('http://localhost:3000/createquery', {
 		    method: 'POST',
 		    headers: {
 		      'Accept': 'application/json',
 		      'Content-Type': 'application/json'
 		    },
-		    body: data1//JSON.stringify({a: 1, b: 'Textual content'})
+		    body: data1
 		  });
 		  const content = await rawResponse.json();
 
@@ -114,7 +95,7 @@ this.setState({ isLoading: true });
 	   	 {parent_key.field_id} : 
 		</label>
 	    	<input type="text" id={parent_key.field_id}  class="form-control" name={parent_key.field_id} />
-		</div>         
+		</div>         																																																																																																																																																																																																																								
 		  </div>
 
 		)

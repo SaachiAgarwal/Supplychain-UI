@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+var QRCode = require('../QR.js');
 
 var content = [];
 var results = [];
@@ -160,13 +161,20 @@ class ViewSingleAsset extends React.Component {
 	
 	  children.push(<td>{value1}</td>)
 	 children.push(<td>{value2}</td>)
+
 	
 
 
       table.push(<tr>{children}</tr>)
 
-    }
 
+    }
+table.push(<td><dt>QR:</dt>
+              <dt><QRCode class='qrcode' value={this.state.asset2.Key}
+                    size={40}
+                    fgColor='purple'
+                    bgColor='white'
+                /></dt></td>)
     return table
 
   }

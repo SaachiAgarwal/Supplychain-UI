@@ -15,6 +15,7 @@ class App extends Component {
   componentDidMount() {
     axios.get('/api/asset')
       .then(res => {
+console.log(res);
         this.setState({ assets: res.data });
         console.log(this.state.assets);
       });

@@ -206,5 +206,3 @@ class AuditAsset extends React.Component {
         }
 
 export default AuditAsset;
-
-
