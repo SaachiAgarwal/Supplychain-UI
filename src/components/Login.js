@@ -1,97 +1,62 @@
-
-import React, { Component } from 'react';
-import { FormErrors } from './FormErrors';
-import './Login.css';
-import { Route } from 'react-router-dom';
-import ReactDOM from 'react-dom';
-import axios from 'axios';
-import { Link } from 'react-router-dom';
+import React, { Component } from "react";
 import { Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
-class Form extends Component {
-  constructor (props) {
+import "./Login.css";
+
+export default class Login extends Component {
+  constructor(props) {
     super(props);
+
     this.state = {
-      email: '',
-      password: '',
-      formErrors: {email: '', password: ''},
-      emailValid: false,
-      passwordValid: false,
-      formValid: false
-    }
-  }
-
-  handleUserInput = (e) => {
-    const name = e.target.name;
-    const value = e.target.value;
-    this.setState({[name]: value},
-                  () => { this.validateField(name, value) });
-  }
-
-  validateField(fieldName, value) {
-    let fieldValidationErrors = this.state.formErrors;
-    let emailValid = this.state.emailValid;
-    let passwordValid = this.state.passwordValid;
-
-    switch(fieldName) {
-      case 'email':
-        emailValid = value.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i);
-        fieldValidationErrors.email = emailValid ? '' : ' is invalid';
-        break;
-      case 'password':
-        passwordValid = value.length >= 6;
-        fieldValidationErrors.password = passwordValid ? '': ' is too short';
-        break;
-      default:
-        break;
-    }
-    this.setState({formErrors: fieldValidationErrors,
-                    emailValid: emailValid,
-                    passwordValid: passwordValid
-                  }, this.validateForm);
+      email: "",
+      password: ""
+    };
   }
 
   validateForm() {
-    this.setState({formValid: this.state.emailValid && this.state.passwordValid});
+    return this.state.email.length > 0 && this.state.password.length > 0;
   }
 
-  errorClass(error) {
-    return(error.length === 0 ? '' : 'has-error');
+  handleChange = event => {
+    this.setState({
+      [event.target.id]: event.target.value
+    });
   }
 
-  render () {
+  handleSubmit = event => {
+    event.preventDefault();
+  }
+
+  render() {
     return (
-      <form className="demoForm">
-        <h2>Sign up</h2>
-        <div className="panel panel-default">
-          <FormErrors formErrors={this.state.formErrors} />
-        </div>
-        <div className={`form-group ${this.errorClass(this.state.formErrors.email)}`}>
-          <label htmlFor="email">Email address</label>
-          <input type="email" required className="form-control" name="email"
-            placeholder="Email"
-            value={this.state.email}
-            onChange={this.handleUserInput}  />
-        </div>
-        <div className={`form-group ${this.errorClass(this.state.formErrors.password)}`}>
-          <label htmlFor="password">Password</label>
-          <input type="password" className="form-control" name="password"
-            placeholder="Password"
-            value={this.state.password}
-            onChange={this.handleUserInput}  />
-        </div>
-<Route render={({ history}) => (
-           <button
-      type='button'
-      onClick={() => { history.push('/home') }}
-    >
-      Click Me!
-    </button>
-  )} />
-      </form>
-    )
+      <div className="Login">
+        <form onSubmit={this.handleSubmit}>
+          <FormGroup controlId="email" bsSize="large">
+            <ControlLabel>Email</ControlLabel>
+            <FormControl
+              autoFocus
+              type="email"
+              value={this.state.email}
+              onChange={this.handleChange}
+            />
+          </FormGroup>
+          <FormGroup controlId="password" bsSize="large">
+            <ControlLabel>Password</ControlLabel>
+            <FormControl
+              value={this.state.password}
+              onChange={this.handleChange}
+              type="password"
+            />
+          </FormGroup>
+          <Button
+            block
+            bsSize="large"
+            disabled={!this.validateForm()}
+            type="submit"
+          >
+            Login
+          </Button>
+        </form>
+      </div>
+    );
   }
 }
-
-export default Form;
-
-

@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-var QRCode = require('../QR.js');
+
+var QRCode = require('qrcode-react');
 
 var content = [];
 var results = [];
@@ -123,18 +124,24 @@ class ViewAsset extends React.Component {
     
 
         var value2 = this.state.asset1[i]['value'];
-
+       
 
 	if(value1 == 'Key'){
+          //var temp1 = this.state.asset1.Key;
+            //var temp2 = '' + temp1;
+             //this.state.asset1.Key = temp2;
           children.push(<td>{value1}</td>)
 		
           children.push(<td>{<Link to={`/viewsingleasset/${value2}`} class="btn btn-success">{value2}</Link>}</td>)
-children.push(<td><dt>QR:</dt>
-              <dt><QRCode class='qrcode' value={this.state.asset1.Key}
-                    size={40}
-                    fgColor='purple'
-                    bgColor='white'
-                /></dt></td>)
+      children.push(<td><dt>QR:</dt>      
+           
+            <dt><QRCode value= {value2} 
+            size={50}
+                   /></dt></td>
+            
+            )
+      //this.state.asset1.Key = temp1;
+           
 	}else{
 	  children.push(<td>{value1}</td>)
 	 children.push(<td>{value2}</td>)
@@ -167,7 +174,7 @@ children.push(<td><dt>QR:</dt>
  
 
     (async () => {
-          const rawResponse = await fetch('http://localhost:3000/getquery', {
+          const rawResponse = await fetch('http://192.168.22.96:3000/getquery',{
             method: 'GET',
             headers: {
               'Accept': 'application/json',

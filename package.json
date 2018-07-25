@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "art": "^0.10.3",
     "axios": "^0.17.0",
     "bluebird": "^3.5.1",
     "body-parser": "^1.18.2",
@@ -10,10 +11,15 @@
     "mongoose": "^4.12.4",
     "morgan": "^1.9.0",
     "qr.js": "0.0.0",
+    "qrcode-react": "^0.1.16",
+    "qrcode.react": "^0.8.0",
     "react": "^16.0.0",
+    "react-art-svg-renderer": "0.0.1-rc.8",
     "react-bootstrap": "^0.32.1",
     "react-dom": "^16.0.0",
     "react-horizontal-data-timeline": "^1.0.1",
+    "react-qr-code": "^0.1.2",
+    "react-qr-reader": "^2.1.0",
     "react-router-dom": "^4.2.2",
     "react-scripts": "1.0.14",
     "serve-favicon": "^2.4.5"

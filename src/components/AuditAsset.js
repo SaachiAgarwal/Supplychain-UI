@@ -1,26 +1,12 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-
-var content = [];
-var results = [];
-
-
-
-
+import './Audit.css';
+import img from './arrow.png';  
 class AuditAsset extends React.Component {
 
 
-
-  listKeys (){
-
-   
-
-    console.log(this.state.asset1);      
-
-
-
-    var i = 0;
+listKeys (){
 
     var keyValue = {};
 
@@ -32,9 +18,7 @@ class AuditAsset extends React.Component {
 
         {this.state.asset1.map(items => {                               
 
-                  {Object.keys(items).map((key) => {
-
-                      console.log(key, items[key]);
+                  {Object.keys(items).map((key) => {                      
 
                       if( !(items[key] instanceof Object)){
 
@@ -58,7 +42,7 @@ class AuditAsset extends React.Component {
 
                                 {Object.keys(items[key]).map((key1) => {
 
-                                    console.log(key1, items[key][key1]);
+                                    //console.log(key1, items[key][key1]);
 
                                     keyValue = {};
 
@@ -99,30 +83,54 @@ class AuditAsset extends React.Component {
  
 
    createTable = () => {
-
-    let table = []
-
- 
-
+   
+    let table = [];
+   
+   
     // Outer loop to create parent
 
     for (let i = 0; i < this.state.asset1.length; i++) {
 
       let children = []
+ var value = this.state.asset1[i]['keyPer']; 
+    
+   while ( value != 'docType' ){
+ 
+  var value1 = this.state.asset1[i]['keyPer'];
+        var value2 = this.state.asset1[i]['value'];
+        if(value1=='txId'){
+         children.push(<td></td>)
+         children.push(<td><img src={img} alt="" border='3' height='40' width='40' /></td>)          
+        }
+          children.push(<tr></tr>)
+    children.push(<td>{value1}:</td>)
+  children.push(<td>{value2}</td>)
+        
+  i++;
 
-      var value1 = this.state.asset1[i]['keyPer']; 
+       value1 = this.state.asset1[i]['keyPer'];
+
+  if ( value1 == 'docType' ){
+
+  var value1 = this.state.asset1[i]['keyPer']; 
 
         var value2 = this.state.asset1[i]['value'];
+    children.push (<tr> </tr>)
+    children.push(<td>{value1}:</td>)
+    children.push(<td>{value2}</td>)
+ 
+table.push(<td>{children}</td>)
+}
 
-     children.push(<td>{value1}</td>)
-	 children.push(<td>{value2}</td>)
+value = this.state.asset1[i]['keyPer']; 
 
+}
 
+     
 
-      table.push(<tr>{children}</tr>)
 
     }
-
+   // console.log(table);
     return table
 
   }
@@ -145,60 +153,45 @@ class AuditAsset extends React.Component {
 
   
     var data3 = {'id':this.props.match.params.id  };
-	
- 		(async () => {
-		  const rawResponse = await fetch('http://localhost:3000/auditquery', {
-		    method: 'POST',
-		    headers: {
-		      'Accept': 'application/json',
-		      'Content-Type': 'application/json'
-		    },
-		    body: (JSON.stringify(data3))
-	  });
-		  const content = await rawResponse.json();
-			this.setState({ asset1: content });
-		  console.log(content);
-		})()
+  
+    (async () => {
+      const rawResponse = await fetch('http://192.168.22.96:3000/auditquery', {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: (JSON.stringify(data3))
+    });
+      const content = await rawResponse.json();
+      this.setState({ asset1: content });
+    //  console.log(content);
+    })()
   }
 
 
   render() {
  
     return (
-      <div class="container">
-
-        <div class="panel panel-default">
-          <div class="panel-heading">
-            <h3 class="panel-title">
+      
+<div>
+        
+            <h3 >
               Audit History
             </h3>
-          </div>
-          <div class="panel-body">
+         
 
-		{this.listKeys()}
-<table class="table table-stripe">
+    
+<table class="table table-stripe"> 
+<tbody>
+    {this.listKeys()}
+    {this.createTable()}
+    </tbody>
+    </table>
+      
+      
 
-		  <thead>
-                <tr>
-                  <th>Field Name</th>
-                  <th>Value</th>
-                 </tr>
-              </thead>
-		<tbody>
-		{this.createTable()}
-		</tbody>
-		</table>
-          <dl>
-    	
-           </dl>
-               </div>
-            </div>
-
-	<div>
-	
-
-
-	  </div>        	    </div>
+  </div>      
 
 
             );

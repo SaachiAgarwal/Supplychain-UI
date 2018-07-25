@@ -31,6 +31,7 @@ console.log(res);
   <a href="/createasset">Create Asset</a>
   <a href="/viewassets">View Assets</a>
  <a href="/createuser">Create User</a>
+ <a href="/scanasset">Scan Asset</a>
 </div>
         <div class="panel panel-default">
           <div class="panel-heading">

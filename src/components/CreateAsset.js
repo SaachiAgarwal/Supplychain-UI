@@ -48,7 +48,7 @@ this.setState({ isLoading: true });
    
     var data1 = stringifyFormData(data);
   		(async () => {
-		  const rawResponse = await fetch('http://localhost:3000/createquery', {
+		  const rawResponse = await fetch('http://192.168.22.96:3000/createquery',{
 		    method: 'POST',
 		    headers: {
 		      'Accept': 'application/json',

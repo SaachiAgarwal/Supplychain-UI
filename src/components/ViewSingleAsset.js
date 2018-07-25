@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-var QRCode = require('../QR.js');
+var QRCode = require('qrcode-react');
 
 var content = [];
 var results = [];
@@ -21,7 +21,7 @@ function ChangeOwner(key) {
 	
 	
 	(async () => { console.log("in update");
-		  const rawResponse = await fetch('http://localhost:3000/updatequery', {
+		  const rawResponse = await fetch('http://192.168.22.96:3000/updatequery', {
 		    method: 'PUT',
 		    headers: {
 		      'Accept': 'application/json',
@@ -170,10 +170,9 @@ class ViewSingleAsset extends React.Component {
 
     }
 table.push(<td><dt>QR:</dt>
-              <dt><QRCode class='qrcode' value={this.state.asset2.Key}
-                    size={40}
-                    fgColor='purple'
-                    bgColor='white'
+              <dt><QRCode value= {value2} 
+                    size={50}
+                    
                 /></dt></td>)
     return table
 
@@ -200,7 +199,7 @@ table.push(<td><dt>QR:</dt>
  	   var data3 = {'id':this.props.match.params.id };
 
     (async () => {
-          const rawResponse = await fetch('http://localhost:3000/getsinglequery', {
+          const rawResponse = await fetch('http://192.168.22.96:3000/getsinglequery',{
             method: 'POST',
             headers: {
               'Accept': 'application/json',

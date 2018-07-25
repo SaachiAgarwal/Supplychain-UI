@@ -2,43 +2,14 @@ table {
   border-collapse: collapse;
 }
 table td {
-  border: 1px solid #ddd;
+  border: 2px solid #ddd;
 }
-.timeline {
-  text-align: center;
-  vertical-align: middle;
-  height: 30px;
-  width: 50px;
-  position: relative;
+table th, td {
+    padding: 15px;
+    text-align: left;
+
 }
-.timeline span {
-  width: 14px;
-  height: 14px;
-  border-radius: 50%;
-  background-color: gray;
-  display: none;
-}
-.timeline.has-left:before {
-  content: '';
-  display: inline-block;
-  position: absolute;
-  left: -1px;
-  width: 50%;
-  height: 3px;
-  top: 12px;
-  background-color: gray;
-}
-.timeline.has-right:after {
-  content: '';
-  display: inline-block;
-  position: absolute;
-  right: -1px;
-  width: 50%;
-  height: 3px;
-  top: 12px;
-  background-color: gray;
-}
-.timeline.has-left span,
-.timeline.has-right span {
-  display: inline-block;
+
+body {
+    font-size: 15px;
 }
